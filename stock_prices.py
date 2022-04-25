@@ -1,9 +1,12 @@
 import requests
 from requests.exceptions import HTTPError
 import csv
+from decouple import config
 
+FIN_API_KEY = config('fin_api_key')
+ENDPOINT = config('endpoint')
 
-def get_quote(symbol, endpoint='https://finnhub.io/api/v1/quote', key='c9iqrl2ad3iblk5af850'):
+def get_quote(symbol, endpoint=ENDPOINT, key=FIN_API_KEY):
     try:
         headers = {'X-Finnhub-Token': key}
         res = requests.get(f'{endpoint}?symbol={symbol}', headers=headers)
